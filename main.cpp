@@ -29,41 +29,41 @@ int main(){
     int width = 2448, height = 2048;
 	cv::Size imgSize = Size(width, height);
 
-	// Input & Output File Path
-	char leftInputDir[50], rightInputDir[50], inputExt[50];
-	sprintf(leftInputDir, "../../Input/20220922/cameraL/");
-	sprintf(rightInputDir, "../../Input/20220922/cameraR/");
-	sprintf(inputExt, "png");
+    // Input & Output File Path
+    char leftInputDir[50], rightInputDir[50], inputExt[50];
+    sprintf(leftInputDir, "../../Input/20220922/cameraL/");
+    sprintf(rightInputDir, "../../Input/20220922/cameraR/");
+    sprintf(inputExt, "png");
 
     char leftOutputDir[50], rightOutputDir[50];
-	sprintf(leftOutputDir, "../../Output/result/20220922/cameraL/");
-	sprintf(rightOutputDir, "../../Output/result/20220922/cameraR/");
+    sprintf(leftOutputDir, "../../Output/result/20220922/cameraL/");
+    sprintf(rightOutputDir, "../../Output/result/20220922/cameraR/");
 
     // Input File Name
-	char inputFilename[50];
-	sprintf(inputFilename, "%s", "IMG");
+    char inputFilename[50];
+    sprintf(inputFilename, "%s", "IMG");
 
 	// Frequency Used
-	int nFreq = 4;
-	vector<float> freqs; // freqs = [1.0, 4.0, 16.0, 48.0];
-	freqs.push_back(1.0);
-	freqs.push_back(4.0);
-	freqs.push_back(16.0);
-	freqs.push_back(48.0);
+    int nFreq = 4;
+    vector<float> freqs; // freqs = [1.0, 4.0, 16.0, 48.0];
+    freqs.push_back(1.0);
+    freqs.push_back(4.0);
+    freqs.push_back(16.0);
+    freqs.push_back(48.0);
 
 	// No. of steps
-	vector<int> nSteps;  // nSteps = [3, 3, 3, 4];
-	nSteps.push_back(3);
-	nSteps.push_back(3);
-	nSteps.push_back(3);
-	nSteps.push_back(4);
+    vector<int> nSteps;  // nSteps = [3, 3, 3, 4];
+    nSteps.push_back(3);
+    nSteps.push_back(3);
+    nSteps.push_back(3);
+    nSteps.push_back(4);
 
 	// Index of images
-	vector<int> nImgs;  // nImgs = [0, 3, 6, 9];
-	nImgs.push_back(0);
-	nImgs.push_back(3);
-	nImgs.push_back(6);
-	nImgs.push_back(9);
+    vector<int> nImgs;  // nImgs = [0, 3, 6, 9];
+    nImgs.push_back(0);
+    nImgs.push_back(3);
+    nImgs.push_back(6);
+    nImgs.push_back(9);
 
     // Enable nested parallelism 
     // 1 = enable, 0 = disable
