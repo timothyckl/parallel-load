@@ -80,10 +80,10 @@ int main(){
     /*====================
     2. Load images
     ====================*/
-	Mat leftImg, rightImg;
+    Mat leftImg, rightImg;
 
     // initialize vector of images
-	std::vector<cv::Mat1f> vImgL(nFreq), vImgR(nFreq);  // [ [], [], [], [] ]
+    std::vector<cv::Mat1f> vImgL(nFreq), vImgR(nFreq);  // [ [], [], [], [] ]
     
     // use two threads (left and right images)
     #pragma omp parallel num_threads(2) {
