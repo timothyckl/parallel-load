@@ -19,14 +19,6 @@
 using namespace std;
 using namespace cv;
 
-void test(std::vector <cv::Mat1f> const &v) {
-	for (int i = 0; i < v.size(); i++) {
-		int rows = v.at(i).rows;
-		int cols = v.at(i).cols;
-		std::cout << "(" << rows << ", " << cols << ")\n";
-	}
-}
-
 int main() {
 	/*====================
 	1. Initialisations
@@ -90,6 +82,9 @@ int main() {
 	// initialize vector of matrices
 	std::vector<cv::Mat1f> vImgL, vImgR;
 
+	// track load time only AFTER all variable initialisations
+	auto loadStart = chrono::high_resolution_clock::now();
+
 	// use two threads (left and right images)
 #pragma omp parallel num_threads(2) 
 	if (omp_get_thread_num() == 0) {
@@ -123,16 +118,20 @@ int main() {
 		}
 	}
 
-	// check vectors
-	printf("left vector:\n");
-	test(vImgL);
-	printf("\n right vector:\n");
-	test(vImgR);
+	auto loadEnd = chrono::high_resolution_clock::now();
+	auto loadElapsed = chrono::duration_cast<chrono::milliseconds>(loadEnd - loadStart);
+	printf("Image load time: %dms\n", loadElapsed.count());
 
 	/*====================
 	3. Phase shifts
 	====================*/
+	auto PSStart = chrono::high_resolution_clock::now();
 
+	// std::vector<cv::Mat> pMaps_L(nfreq), pMaps_R(nfreq); // save wrapped phases
+
+	auto PSEnd = chrono::high_resolution_clock::now();
+	auto PSElapsed = chrono::duration_cast<chrono::milliseconds>(PSEnd - PSStart);
+	printf("Image load time: %dms\n", PSElapsed.count());
 
 	/*====================
 	4. Phase unwrapping
