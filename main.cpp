@@ -19,6 +19,14 @@
 using namespace std;
 using namespace cv;
 
+void check(std::vector <cv::Mat1f> const &vec) {
+    for (int i = 0; i < vec.size(); i++) {
+		int rows = vec.at(i).rows;
+		int cols = vec.at(i).cols;
+		std::cout << "(" << rows << ", " << cols << ")\n";
+	}
+}
+
 int main() {
 	/*====================
 	1. Initialisations
@@ -79,8 +87,8 @@ int main() {
 	====================*/
 	Mat leftImg, rightImg;
 
-	// initialize vector of matrices
-	std::vector<cv::Mat1f> vImgL, vImgR;
+	// initialize image containers
+	std::vector<cv::Mat1f> leftImgVec, rightImgVec;
 
 	// track load time only AFTER all variable initialisations
 	auto loadStart = chrono::high_resolution_clock::now();
@@ -98,7 +106,7 @@ int main() {
 				// read left camera image
 				leftImg = imread(leftImgFile, IMREAD_GRAYSCALE);
 				Mat1f leftImgF(leftImg);
-				vImgL.push_back(leftImgF);
+				leftImgVec.push_back(leftImgF);
 			}
 		}
 	}
@@ -113,7 +121,7 @@ int main() {
 				// read right camera image
 				rightImg = imread(rightImgFile, IMREAD_GRAYSCALE);
 				Mat1f rightImgF(rightImg);
-				vImgR.push_back(rightImgF);
+				rightImgVec.push_back(rightImgF);
 			}
 		}
 	}
@@ -122,18 +130,32 @@ int main() {
 	auto loadElapsed = chrono::duration_cast<chrono::milliseconds>(loadEnd - loadStart);
 	printf("Image load time: %dms\n", loadElapsed.count());
 
+    printf("\nLeft image size: \n");
+    check(leftImgVec);
+    printf("\nRight image size: \n");
+    check(rightImgVec);
+
 	/*====================
 	3. Phase shifts
-	====================*/
+	====================
+    Mat leftPhase = Mat::zeros(imgSize, CV_32FC1), rightPhase = Mat::zeros(imgSize, CV_32FC1); 
+
+    // initialize phase shift containers
+    std::vector<cv::Mat1f> leftPMVec, rightPMVec;
+
+
 	auto PSStart = chrono::high_resolution_clock::now();
 
-	// std::vector<cv::Mat> pMaps_L(nfreq), pMaps_R(nfreq); // save wrapped phases
+    // do stuff    
 
 	auto PSEnd = chrono::high_resolution_clock::now();
 	auto PSElapsed = chrono::duration_cast<chrono::milliseconds>(PSEnd - PSStart);
 	printf("Image load time: %dms\n", PSElapsed.count());
-
-	/*====================
+    
+    */
+	
+    /*====================
 	4. Phase unwrapping
 	====================*/
+
 }
