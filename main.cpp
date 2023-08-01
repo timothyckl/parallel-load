@@ -129,7 +129,7 @@ int main() {
 	auto loadEnd = chrono::high_resolution_clock::now();
 	auto loadElapsed = chrono::duration_cast<chrono::milliseconds>(loadEnd - loadStart);
 	printf("Image load time: %dms\n", loadElapsed.count());
-
+    
     printf("\nLeft image size: \n");
     check(leftImgVec);
     printf("\nRight image size: \n");
