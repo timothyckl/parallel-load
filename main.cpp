@@ -113,10 +113,10 @@ int main() {
 	else {
 		// right camera
 #pragma omp parallel for num_threads(nFreq)
-		for (int freq = 0; freq < nFreq; ++freq) {
-			for (int step = 0; step < nSteps[freq]; ++step) {
+		for (int n = 0; n < nFreq; ++n) {
+			for (int step = 0; step < nSteps[n]; ++step) {
 				char rightImgFile[50];
-				sprintf(rightImgFile, "%s%s_%d.%s", rightInputDir, inputFilename, step + nImgs[freq], inputExt);
+				sprintf(rightImgFile, "%s%s_%d.%s", rightInputDir, inputFilename, step + nImgs[n], inputExt);
 
 				// read right camera image
 				rightImg = imread(rightImgFile, IMREAD_GRAYSCALE);
